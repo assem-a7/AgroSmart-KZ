@@ -7,14 +7,18 @@ app.py ішінен `from subsidy_verifier import verify` деп импортт�
 from __future__ import annotations
 
 import hashlib
+import json
+import logging
 import os
 from datetime import datetime, timedelta
 from typing import Any
+from urllib.error import HTTPError, URLError
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
 
 import numpy as np
 from PIL import Image, ImageDraw
 from dotenv import load_dotenv
-import logging
 
 try:  # pragma: no cover
     import torch
@@ -76,6 +80,8 @@ except Exception:  # pragma: no cover
 
 _BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 load_dotenv(dotenv_path=os.path.join(_BASE_DIR, ".env"), override=False)
+_NOMINATIM_REVERSE_URL = "https://nominatim.openstreetmap.org/reverse"
+_URBAN_REJECT_REASON = "Берілген координат қалалық аймақта. Ауылшаруашылық жер табылмады."
 
 
 def _require_file(path: str, alias: str) -> None:
@@ -132,6 +138,53 @@ def stable_seed(lat: float, lon: float, area: float) -> int:
     payload = f"{float(lat):.6f}|{float(lon):.6f}|{float(area):.2f}"
     digest = hashlib.sha256(payload.encode("utf-8")).hexdigest()
     return int(digest[:8], 16)
+
+
+def check_land_type(lat: float, lon: float) -> str:
+    """Nominatim reverse-geocoding арқылы аймақ типін анықтайды."""
+    query = urlencode(
+        {
+            "format": "jsonv2",
+            "lat": f"{float(lat):.7f}",
+            "lon": f"{float(lon):.7f}",
+            "addressdetails": 1,
+            "zoom": 18,
+        }
+    )
+    request = Request(
+        f"{_NOMINATIM_REVERSE_URL}?{query}",
+        headers={
+            "User-Agent": "AgroSmart-KZ/2.1 (subsidy-verifier; contact=local-app)"
+        },
+    )
+    try:
+        with urlopen(request, timeout=8) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+    except (HTTPError, URLError, TimeoutError, json.JSONDecodeError) as exc:
+        logging.warning("Nominatim pre-check қате: %s", str(exc))
+        return "unknown"
+
+    address = payload.get("address", {}) if isinstance(payload, dict) else {}
+    if not isinstance(address, dict):
+        return "unknown"
+
+    if any(address.get(tag) for tag in ("city", "town", "suburb", "residential")):
+        return "urban"
+    if address.get("road") or address.get("highway"):
+        return "road"
+    if any(address.get(tag) for tag in ("village", "hamlet", "farm")):
+        return "rural"
+    return "unknown"
+
+
+def evaluate_ndvi_signal(ndvi: float) -> dict[str, Any]:
+    """NDVI бойынша егіс ықтималдығын бағалайды."""
+    ndvi_val = float(np.clip(ndvi, -1.0, 1.0))
+    if ndvi_val < 0.2:
+        return {"crop_detected": False, "status": "бетон/асфальт"}
+    if ndvi_val <= 0.4:
+        return {"crop_detected": False, "status": "күдікті"}
+    return {"crop_detected": True, "status": "егіс мүмкін"}
 
 
 def _init_gee() -> None:
@@ -834,6 +887,51 @@ def verify(claim_dict: dict[str, Any], lat: float, lon: float) -> dict[str, Any]
     if not isinstance(claim_dict, dict):
         raise TypeError("claim_dict dict болуы керек")
 
+    lat_f = float(lat)
+    lon_f = float(lon)
+    area_type = check_land_type(lat_f, lon_f)
+    if area_type in {"urban", "city", "road"}:
+        return {
+            "decision": "ӨТІРІК",
+            "score": 0,
+            "risk_level": "Жоғары",
+            "reject_reason": _URBAN_REJECT_REASON,
+            "score_breakdown": {
+                "crop_detected": 0,
+                "area_match": 0,
+                "health": 0,
+                "crop_type_match": 0,
+            },
+            "details": {
+                "farmer_name": claim_dict.get("farmer_name", ""),
+                "region": claim_dict.get("region", ""),
+                "claimed_crop": str(claim_dict.get("crop_type", "Басқа")),
+                "identified_crop": "Анықталмады",
+                "crop_match": False,
+                "crop_detected": False,
+                "detection_confidence": 0.0,
+                "detected_classes": [],
+                "yolo_matched": False,
+                "yolo_raw_boxes": 0,
+                "classification_confidence": 0.0,
+                "classification_top3": [],
+                "health_score": 1,
+                "health_label": HEALTH_LABELS[1],
+                "declared_area_ha": round(float(claim_dict.get("declared_area_ha", 0) or 0), 2),
+                "detected_area_ha": 0.0,
+                "area_difference_pct": 100.0,
+                "ndvi_status": "қол жетімсіз",
+                "area_type": area_type,
+            },
+            "satellite": {
+                "source": "OpenStreetMap Nominatim pre-check",
+                "lat": round(lat_f, 6),
+                "lon": round(lon_f, 6),
+                "land_type": area_type,
+            },
+            "seed": stable_seed(lat_f, lon_f, float(claim_dict.get("declared_area_ha", 0) or 0)),
+        }
+
     declared_area = float(claim_dict.get("declared_area_ha", 0))
     if declared_area <= 0:
         raise ValueError("declared_area_ha 0-ден үлкен болуы керек")
@@ -842,17 +940,20 @@ def verify(claim_dict: dict[str, Any], lat: float, lon: float) -> dict[str, Any]
     application_date = str(
         claim_dict.get("application_date", datetime.utcnow().strftime("%Y-%m-%d"))
     )
-    seed = stable_seed(lat, lon, declared_area)
+    seed = stable_seed(lat_f, lon_f, declared_area)
     rng = np.random.default_rng(seed + 202)
 
-    satellite = simulate_sentinel2(lat, lon, application_date, rng)
-    yolo = run_yolov8(lat, lon, declared_area, claimed_crop, rng)
-    cls = run_efficientnet(lat, lon, claimed_crop, rng)
+    satellite = simulate_sentinel2(lat_f, lon_f, application_date, rng)
+    yolo = run_yolov8(lat_f, lon_f, declared_area, claimed_crop, rng)
+    cls = run_efficientnet(lat_f, lon_f, claimed_crop, rng)
     health = run_health_cnn(satellite["ndvi"], seed)
     area = run_unet(declared_area, seed, ndvi=satellite["ndvi"])  # ✅ ТҮЗЕТІЛДІ: спутниктік NDVI U-Net кірісіне берілді
+    ndvi_eval = evaluate_ndvi_signal(satellite["ndvi"])
+    ndvi_crop_detected = bool(ndvi_eval["crop_detected"])
+    final_crop_detected = bool(yolo["detected"]) and ndvi_crop_detected
 
     scoring = calculate_score(
-        crop_detected=yolo["detected"],
+        crop_detected=final_crop_detected,
         detection_confidence=yolo["confidence"],
         declared_area=declared_area,
         detected_area=area["detected_ha"],
@@ -871,7 +972,7 @@ def verify(claim_dict: dict[str, Any], lat: float, lon: float) -> dict[str, Any]
             "claimed_crop": claimed_crop,
             "identified_crop": cls["identified_crop"],
             "crop_match": cls["match"],
-            "crop_detected": yolo["detected"],
+            "crop_detected": final_crop_detected,
             "detection_confidence": yolo["confidence"],
             "detected_classes": yolo["detected_classes"],
             "yolo_matched": yolo["matched"],
@@ -883,6 +984,8 @@ def verify(claim_dict: dict[str, Any], lat: float, lon: float) -> dict[str, Any]
             "declared_area_ha": round(declared_area, 2),
             "detected_area_ha": area["detected_ha"],
             "area_difference_pct": scoring["area_difference_pct"],
+            "ndvi_status": ndvi_eval["status"],
+            "area_type": area_type,
         },
         "satellite": satellite,
         "seed": seed,
@@ -891,6 +994,7 @@ def verify(claim_dict: dict[str, Any], lat: float, lon: float) -> dict[str, Any]
 
 __all__ = [
     "stable_seed",
+    "check_land_type",
     "get_sentinel2_ndvi",
     "simulate_sentinel2",
     "run_yolov8",
