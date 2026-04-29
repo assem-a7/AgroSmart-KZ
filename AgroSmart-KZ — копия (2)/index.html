@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroSmart KZ - Жасанды интеллект және ауылшаруашылық</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <link rel="stylesheet" href="styles/chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-section">
+                <div class="logo">
+                    <i class="fas fa-seedling"></i>
+                    <span class="logo-text">AgroSmart KZ</span>
+                </div>
+                <p class="tagline">Жасанды интеллект · Ауылшаруашылық AI ПЛАТФОРМАСЫ</p>
+            </div>
+            
+            <nav class="main-nav">
+                <a href="#home" class="nav-link active">
+                    <i class="fas fa-home"></i>
+                    <span>Басты бет</span>
+                </a>
+                <a href="#analytics" class="nav-link">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Аналитика</span>
+                </a>
+                <a href="#ai-tools" class="nav-link">
+                    <i class="fas fa-robot"></i>
+                    <span>AI құралдар</span>
+                </a>
+            </nav>
+            
+            <div class="header-actions">
+                <button class="btn-icon notification-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </button>
+                <div class="user-menu">
+                    <img src="https://ui-avatars.com/api/?name=User&background=22c55e&color=fff" alt="User" class="user-avatar">
+                    <span class="user-name">Қолданушы</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3>Навигация</h3>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#road-map" class="sidebar-link active">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>Жалпы шолу</span>
+                </a>
+                <a href="#district-map" class="sidebar-link">
+                    <i class="fas fa-map"></i>
+                    <span>Аймақтық карта</span>
+                </a>
+                <a href="#ai-scoring" class="sidebar-link">
+                    <i class="fas fa-brain"></i>
+                    <span>AI Скоринг</span>
+                </a>
+                <a href="#predictions" class="sidebar-link">
+                    <i class="fas fa-chart-area"></i>
+                    <span>Болжамдау</span>
+                </a>
+                <a href="#land-analysis" class="sidebar-link">
+                    <i class="fas fa-layer-group"></i>
+                    <span>Жер талдауы</span>
+                </a>
+                <a href="#subsidy-verification" class="sidebar-link">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Субсидия верификациясы</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="data-source">
+                    <i class="fas fa-database"></i>
+                    <div class="source-info">
+                        <p class="source-label">Дерек көзі:</p>
+                        <p class="source-name">ҚР субсидия тізімі 2025</p>
+                        <p class="source-details">17 облыс · 3 қала</p>
+                        <p class="source-tech">Isolation Forest + XGBoost</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Overview -->
+            <section id="dashboard-overview" class="content-section active">
+                <div class="section-header">
+                    <div>
+                        <h1>Жалпы шолу</h1>
+                        <p class="section-subtitle">Субсидия өтінімдерінің жылдық аналитикасы - 2025 жыл</p>
+                    </div>
+                    <div class="header-filters">
+                        <select class="filter-select">
+                            <option value="2024">2024</option>
+                            <option value="2025" selected>2025</option>
+                        </select>
+                        <select class="filter-select">
+                            <option value="">Барлық облыстар</option>
+                            <option value="kostanay">Қостанай</option>
+                            <option value="akmola">Ақмола</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Key Metrics -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-label">Барлық өтінім</span>
+                            <i class="fas fa-file-alt metric-icon"></i>
+                        </div>
+                        <div class="metric-value">36,651</div>
+                        <div class="metric-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+8% өткен жылмен салыстырғанда</span>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-label">Жалпы сомасы</span>
+                            <i class="fas fa-money-bill-wave metric-icon"></i>
+                        </div>
+                        <div class="metric-value">139.33 млрд ₸</div>
+                        <div class="metric-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+12% бюджет динамикасы</span>
+                        </div>
+                    </div>
+
+                    <div class="metric-card warning">
+                        <div class="metric-header">
+                            <span class="metric-label">Өрнідалу үлесі</span>
+                            <i class="fas fa-exclamation-triangle metric-icon"></i>
+                        </div>
+                        <div class="metric-value">57.3%</div>
+                        <div class="metric-change negative">
+                            <i class="fas fa-arrow-down"></i>
+                            <span>мерзімдік орындалу</span>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-label">Жоғары тәуекел / мерит</span>
+                            <i class="fas fa-chart-pie metric-icon"></i>
+                        </div>
+                        <div class="metric-value">1,099 / 50.1</div>
+                        <div class="metric-change neutral">
+                            <span>тәуекел мониторингі</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Өтінімдер статусы бойынша</h3>
+                            <button class="btn-icon-sm">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="statusChart"></canvas>
+                        </div>
+                        <div class="chart-legend">
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #22c55e;"></span>
+                                <span class="legend-label">Орындалды (79.4%)</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #ef4444;"></span>
+                                <span class="legend-label">Қабылданған емес (7.9%)</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #f59e0b;"></span>
+                                <span class="legend-label">Одобрена (20.8%)</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #eab308;"></span>
+                                <span class="legend-label">Отозвано (5.63%)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Субсидия бағыттары (ТОП-10)</h3>
+                            <button class="btn-icon-sm">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="topSubsidiesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Strategic Recommendations -->
+                <div class="ai-recommendations">
+                    <div class="recommendation-header">
+                        <div class="ai-badge">
+                            <i class="fas fa-magic"></i>
+                            <span>AI стратегиялық түсініктер</span>
+                        </div>
+                    </div>
+                    <div class="recommendations-grid">
+                        <div class="recommendation-card">
+                            <div class="recommendation-icon success">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h4>Drought risk analysis</h4>
+                            <p>Жоғары тәуекел үлесі 3.0% құрады. Оңтүстік өңірлерде құрғақшылық қаупі бар, суармалы шаруашылық қажет.</p>
+                        </div>
+                        <div class="recommendation-card">
+                            <div class="recommendation-icon warning">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4>Yield optimization</h4>
+                            <p>Орташа Merit 50.1/100. Төмен балл аймақтарында насихат көлемін арттыру ұсынылады.</p>
+                        </div>
+                        <div class="recommendation-card">
+                            <div class="recommendation-icon info">
+                                <i class="fas fa-signal"></i>
+                            </div>
+                            <h4>Budget signal</h4>
+                            <p>Жалпы бюджет 139.33 млрд ₸. Басымдық барлық үшін жеткілікті қаржы тарату үшін қолданылады.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Time Series Chart -->
+                <div class="chart-card full-width">
+                    <div class="chart-header">
+                        <h3>Өтінімдер динамикасы (ай бойынша)</h3>
+                        <div class="chart-controls">
+                            <button class="btn-sm active">12 ай</button>
+                            <button class="btn-sm">6 ай</button>
+                            <button class="btn-sm">3 ай</button>
+                        </div>
+                    </div>
+                    <div class="chart-container large">
+                        <canvas id="timeSeriesChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Subsidy Verification Section -->
+            <section id="subsidy-verification" class="content-section">
+                <div class="section-header">
+                    <div>
+                        <h1>Субсидия тексеру</h1>
+                        <p class="section-subtitle">Симуляциялық ML модельдерімен автоматты верификация</p>
+                    </div>
+                </div>
+
+                <div class="verification-form-card">
+                    <h2>Өтінім формасы</h2>
+                    
+                    <form id="verificationForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="region">Облыс</label>
+                                <select id="region" class="form-control" required>
+                                    <option value="">Таңдаңыз</option>
+                                    <option value="akmola">Ақмола</option>
+                                    <option value="kostanay">Қостанай</option>
+                                    <option value="north-kaz">Солтүстік-Қазақстан</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="crop-type">Дақыл түрі</label>
+                                <select id="crop-type" class="form-control" required>
+                                    <option value="">Таңдаңыз</option>
+                                    <option value="wheat">Бидай</option>
+                                    <option value="barley">Арпа</option>
+                                    <option value="corn">Жүгері</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="area">Ауданы (га)</label>
+                                <div class="input-with-controls">
+                                    <button type="button" class="input-control" onclick="adjustValue('area', -10)">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="number" id="area" class="form-control" value="100.00" step="0.01" min="0" required>
+                                    <button type="button" class="input-control" onclick="adjustValue('area', 10)">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="subsidy-amount">Субсидия сомасы (₸)</label>
+                                <div class="input-with-controls">
+                                    <button type="button" class="input-control" onclick="adjustValue('subsidy-amount', -100000)">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="number" id="subsidy-amount" class="form-control" value="5000000.00" step="0.01" min="0" required>
+                                    <button type="button" class="input-control" onclick="adjustValue('subsidy-amount', 100000)">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="application-date">Өтінім күні</label>
+                                <input type="date" id="application-date" class="form-control" value="2025-04-27" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="farmer-id">Фермер ID</label>
+                                <input type="text" id="farmer-id" class="form-control" value="51,160000" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="land-quality">Жер сапасы скоры</label>
+                                <div class="input-with-controls">
+                                    <button type="button" class="input-control" onclick="adjustValue('land-quality', -1)">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="number" id="land-quality" class="form-control" value="71.470000" step="0.001" min="0" max="100" required>
+                                    <button type="button" class="input-control" onclick="adjustValue('land-quality', 1)">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-primary btn-large">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Тексеруді бастау</span>
+                        </button>
+                    </form>
+
+                    <div id="verificationResult" class="verification-result hidden">
+                        <!-- Results will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Map Display -->
+                <div class="map-card">
+                    <div class="map-header">
+                        <h3>Қартадан таңдау (Folium)</h3>
+                        <div class="map-controls">
+                            <button class="btn-sm">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="map" class="map-container">
+                        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=51.0%2C68.0%2C87.0%2C55.0&layer=mapnik" width="100%" height="100%" frameborder="0"></iframe>
+                        <div class="map-coordinates">
+                            Қартадан таңдалды: 52.375599, 65.078125
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Land Analysis Section -->
+            <section id="land-analysis" class="content-section">
+                <div class="section-header">
+                    <div>
+                        <h1>Жер талдауы</h1>
+                        <p class="section-subtitle">AI технологиялары арқылы топырақ құрамын тереңдетіп талдау</p>
+                    </div>
+                </div>
+
+                <div class="land-analysis-grid">
+                    <div class="upload-card">
+                        <h3>Топырақ фотосын жүктеу</h3>
+                        <p class="upload-description">JPG/PNG форматында 2-5 сурет жүктеңіз. Жақсы жарық пен жақын қашықтық дәлдікті арттырады.</p>
+                        
+                        <div class="upload-area" id="uploadArea">
+                            <div class="upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <p class="upload-text">Макс. 15MB - Тек топырақ көрінісі</p>
+                            <input type="file" id="soilImageUpload" accept="image/*" multiple hidden>
+                            <button class="btn-secondary" onclick="document.getElementById('soilImageUpload').click()">
+                                <i class="fas fa-file-upload"></i>
+                                Файл таңдау
+                            </button>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="land-region">Облыс</label>
+                            <select id="land-region" class="form-control">
+                                <option value="">Таңдаңыз</option>
+                                <option value="north-kaz">Солтүстік-Қазақстан</option>
+                                <option value="akmola">Ақмола</option>
+                                <option value="kostanay">Қостанай</option>
+                            </select>
+                        </div>
+
+                        <button class="btn-primary btn-large" id="analyzeSoilBtn">
+                            <i class="fas fa-microscope"></i>
+                            <span>Топырақ талдауын бастау</span>
+                        </button>
+
+                        <div class="analysis-history">
+                            <h4>Соңғы талдау тарихы</h4>
+                            <p class="history-note">Әзірге талдау жүргізілген жоқ. Фото жүктеп, бірінші талдауды бастаңыз.</p>
+                        </div>
+                    </div>
+
+                    <div class="ai-insights-card">
+                        <div class="insights-header">
+                            <i class="fas fa-robot"></i>
+                            <h3>AI ұсыныстары</h3>
+                        </div>
+                        
+                        <div class="insights-list">
+                            <div class="insight-item">
+                                <div class="insight-icon success">
+                                    <i class="fas fa-leaf"></i>
+                                </div>
+                                <div class="insight-content">
+                                    <h4>Фотолардың қажетті нұқтасын түсіру жүйесі</h4>
+                                    <p>Бұл модельдің сымдығын айғалысып арттырады.</p>
+                                </div>
+                            </div>
+
+                            <div class="insight-item">
+                                <div class="insight-icon warning">
+                                    <i class="fas fa-water"></i>
+                                </div>
+                                <div class="insight-content">
+                                    <h4>Егер ылғал жоғары болса, органикалық тыңайтқыш пен аэрация тәсілін бірге қондырыңыз</h4>
+                                    <p>Ылғалдылықты оптимизациялаңыз.</p>
+                                </div>
+                            </div>
+
+                            <div class="insight-item">
+                                <div class="insight-icon info">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                                <div class="insight-content">
+                                    <h4>Аймақуа белінділігін дәлірдеу тізімін асжарт, егу жоспарын кезеңдер бойынша құзыру ұсынылады</h4>
+                                    <p>Жоспарлау әдістері.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="soil-types-grid">
+                            <h4>Топырақ түрлері анықтамалығы</h4>
+                            
+                            <div class="soil-type-card success">
+                                <div class="soil-header">
+                                    <h5>Аллювиалды топырақ</h5>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                                <p>Аллювиалдық — өте плодородны, өзенге өтілеген</p>
+                            </div>
+
+                            <div class="soil-type-card warning">
+                                <h5>Құрғақ (Аридті) топырақ</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p>Аридаяң — құйақ, пустынны, бедені пітелінімімі веществимі</p>
+                            </div>
+
+                            <div class="soil-type-card success">
+                                <h5>Қара топырақ (Чернозём)</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p>Чернозём — самий плодородній тіп Қазақстана</p>
+                            </div>
+
+                            <div class="soil-type-card danger">
+                                <h5>Таулы топырақ</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p>Горная — каменістій, малопомощій, құтує склони</p>
+                            </div>
+
+                            <div class="soil-type-card warning">
+                                <h5>Латеритті топырақ</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p>Латерітная — бедній, қислак, віщелоченая</p>
+                            </div>
+
+                            <div class="soil-type-card info">
+                                <h5>Қызыл топырақ</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p>Қрасная — бедній азотам, требует удобрівій</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Predictions Section -->
+            <section id="predictions-section" class="content-section">
+                <div class="section-header">
+                    <div>
+                        <h1>Болжамдау жүйесі</h1>
+                        <p class="section-subtitle">Exponential Smoothing алгоритмі - Уақыт сериясы талдауы</p>
+                    </div>
+                </div>
+
+                <div class="predictions-container">
+                    <div class="prediction-controls-card">
+                        <h3>Параметрлер</h3>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="pred-region">Облыс</label>
+                                <select id="pred-region" class="form-control">
+                                    <option value="all">Барлығы</option>
+                                    <option value="kostanay">Қостанай</option>
+                                    <option value="akmola">Ақмола</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pred-direction">Бағыт</label>
+                                <select id="pred-direction" class="form-control">
+                                    <option value="all">Барлығы</option>
+                                    <option value="wheat">Бидай</option>
+                                    <option value="livestock">Мал шаруашылығы</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="pred-months">Болжам мерзімі (ай)</label>
+                                <div class="slider-container">
+                                    <input type="range" id="pred-months" min="1" max="12" value="3" class="slider">
+                                    <span class="slider-value">3 ай</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn-primary btn-large">
+                            <i class="fas fa-chart-line"></i>
+                            Болжам жасау
+                        </button>
+                    </div>
+
+                    <div class="prediction-chart-card">
+                        <div class="chart-header">
+                            <h3>Өтінімдер саны болжамы</h3>
+                            <div class="chart-legend-inline">
+                                <span class="legend-dot" style="background: #22c55e;"></span>
+                                <span>Нақты деректер</span>
+                                <span class="legend-dot" style="background: #f59e0b;"></span>
+                                <span>Болжам</span>
+                            </div>
+                        </div>
+                        <div class="chart-container large">
+                            <canvas id="predictionChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="prediction-results-grid">
+                        <div class="result-card">
+                            <div class="result-month">2026-04</div>
+                            <div class="result-value">1349 өтінім</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="result-card">
+                            <div class="result-month">2026-05</div>
+                            <div class="result-value">1364 өтінім</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 88%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="result-card">
+                            <div class="result-month">2026-06</div>
+                            <div class="result-value">1378 өтінім</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subsidy-amount-prediction">
+                        <h3>Субсидия сомасы болжамы</h3>
+                        <div class="amount-chart-container">
+                            <canvas id="amountPredictionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- District Map Section -->
+            <section id="district-map-section" class="content-section">
+                <div class="section-header">
+                    <div>
+                        <h1>Аймақтық карта</h1>
+                        <p class="section-subtitle">Қазақстан облыстары бойынша субсидия аналитикасы</p>
+                    </div>
+                </div>
+
+                <div class="map-dashboard">
+                    <div class="interactive-map-card">
+                        <div class="map-header">
+                            <h3>Интерактивті карта</h3>
+                            <div class="map-legend-vertical">
+                                <h4>Merit шкаласы</h4>
+                                <div class="legend-gradient">
+                                    <div class="gradient-bar"></div>
+                                    <div class="gradient-labels">
+                                        <span>20</span>
+                                        <span>40</span>
+                                        <span>60</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="kazakhstanMap" class="kazakhstan-map">
+                            <!-- SVG or Leaflet map will be inserted here -->
+                            <div class="map-placeholder">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <p>Карта жүктелуде...</p>
+                            </div>
+                        </div>
+                        <div class="map-info-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Шеңбер өлшемі — өтінімдер санына сәйкес. Түсі — Merit Score деңгейін көрсетеді (жасыл = жоғары, қызыл = төмен).</span>
+                        </div>
+                    </div>
+
+                    <div class="regions-table-card">
+                        <div class="table-header">
+                            <h3>Облыстар бойынша толық кесте</h3>
+                            <button class="btn-sm">
+                                <i class="fas fa-download"></i>
+                                Excel
+                            </button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Облыс</th>
+                                        <th>Барлық өтінім</th>
+                                        <th>Орындалды</th>
+                                        <th>Орындалу %</th>
+                                        <th>Орташа Merit</th>
+                                        <th>Жоғары тәуекел</th>
+                                        <th>Тәуекел %</th>
+                                        <th>Жалпы сомасы (₸)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Қостанайская область</strong></td>
+                                        <td>2509</td>
+                                        <td>2298</td>
+                                        <td><span class="badge-success">91.6</span></td>
+                                        <td>64.8</td>
+                                        <td>93</td>
+                                        <td>2</td>
+                                        <td>7,067,159,405</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Северо-Казахстанская область</strong></td>
+                                        <td>1554</td>
+                                        <td>1101</td>
+                                        <td><span class="badge-warning">70.8</span></td>
+                                        <td>63</td>
+                                        <td>93</td>
+                                        <td>6</td>
+                                        <td>10,456,284,236</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Түркістанская область</strong></td>
+                                        <td>2281</td>
+                                        <td>1121</td>
+                                        <td><span class="badge-warning">49.1</span></td>
+                                        <td>62.7</td>
+                                        <td>62</td>
+                                        <td>2.7</td>
+                                        <td>11,466,383,558</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Область Жетісу</strong></td>
+                                        <td>1479</td>
+                                        <td>1306</td>
+                                        <td><span class="badge-success">88.3</span></td>
+                                        <td>59.8</td>
+                                        <td>36</td>
+                                        <td>2.4</td>
+                                        <td>4,578,854,665</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Область Абай</strong></td>
+                                        <td>1885</td>
+                                        <td>2864</td>
+                                        <td><span class="badge-warning">78.3</span></td>
+                                        <td>57.5</td>
+                                        <td>42</td>
+                                        <td>1.1</td>
+                                        <td>7,561,788,874</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Scoring Section -->
+            <section id="ai-scoring-section" class="content-section">
+                <div class="section-header">
+                    <div>
+                        <h1>AI Scoring талдауы</h1>
+                        <p class="section-subtitle">Интеллектуалды талдау арқылы ұсыныстар мен статистика</p>
+                    </div>
+                    <div class="header-filters">
+                        <button class="btn-sm active">Барлығы</button>
+                        <button class="btn-sm">Жоғары тәуекел</button>
+                        <button class="btn-sm">Орта тәуекел</button>
+                    </div>
+                </div>
+
+                <div class="scoring-dashboard">
+                    <div class="scoring-stats">
+                        <div class="stat-card primary">
+                            <div class="stat-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-label">Орташа Merit Score</div>
+                                <div class="stat-value">82.4</div>
+                                <div class="stat-trend positive">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span>+5.2% өткен айға қарағанда</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card success">
+                            <div class="stat-icon">
+                                <i class="fas fa-check-double"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-label">Сапалы өтініmdер</div>
+                                <div class="stat-value">1,284</div>
+                                <div class="stat-description">Merit > 70 көрсеткіші</div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card warning">
+                            <div class="stat-icon">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-label">Назар аудару керек</div>
+                                <div class="stat-value">956</div>
+                                <div class="stat-description">Орта тәуекел деңгейі</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="scoring-lists">
+                        <div class="scoring-list-card">
+                            <h3>Жоғары деңгейлі өтінімдер</h3>
+                            <div class="scoring-items">
+                                <div class="scoring-item success">
+                                    <div class="item-header">
+                                        <span class="item-name">Aqjaiyq БД</span>
+                                        <span class="item-score">92</span>
+                                    </div>
+                                    <div class="item-details">
+                                        <span class="detail-badge">ДЫМЫҚ</span>
+                                        <span class="detail-date">12.01.2024</span>
+                                    </div>
+                                    <div class="progress-bar sm">
+                                        <div class="progress-fill success" style="width: 92%;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="scoring-item success">
+                                    <div class="item-header">
+                                        <span class="item-name">TechAgro-Invest ЖШС</span>
+                                        <span class="item-score">88</span>
+                                    </div>
+                                    <div class="item-details">
+                                        <span class="detail-badge">ҒАЛЫМ</span>
+                                        <span class="detail-date">18.02.2024</span>
+                                    </div>
+                                    <div class="progress-bar sm">
+                                        <div class="progress-fill success" style="width: 88%;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="scoring-item success">
+                                    <div class="item-header">
+                                        <span class="item-name">Agro-Kurmet</span>
+                                        <span class="item-score">85</span>
+                                    </div>
+                                    <div class="item-details">
+                                        <span class="detail-badge">ДЫМЫҚ</span>
+                                        <span class="detail-date">08.03.2024</span>
+                                    </div>
+                                    <div class="progress-bar sm">
+                                        <div class="progress-fill success" style="width: 85%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn-link">
+                                Барлық тізімді көру
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <div class="scoring-list-card">
+                            <h3>Назар аудару қажет</h3>
+                            <div class="scoring-items">
+                                <div class="scoring-item warning">
+                                    <div class="item-header">
+                                        <span class="item-name">AgroService LLC</span>
+                                        <span class="item-score danger">52</span>
+                                    </div>
+                                    <div class="item-details">
+                                        <span class="detail-badge">ӨРНІДІК</span>
+                                        <span class="detail-date">15.02.2024</span>
+                                    </div>
+                                    <div class="progress-bar sm">
+                                        <div class="progress-fill danger" style="width: 52%;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="scoring-item warning">
+                                    <div class="item-header">
+                                        <span class="item-name">GreenField Farms</span>
+                                        <span class="item-score warning">64</span>
+                                    </div>
+                                    <div class="item-details">
+                                        <span class="detail-badge">ДЫМЫҚ</span>
+                                        <span class="detail-date">22.01.2024</span>
+                                    </div>
+                                    <div class="progress-bar sm">
+                                        <div class="progress-fill warning" style="width: 64%;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="scoring-item warning">
+                                    <div class="item-header">
+                                        <span class="item-name">KazakhGrain</span>
+                                        <span class="item-score warning">58</span>
+                                    </div>
+                                    <div class="item-details">
+                                        <span class="detail-badge">МҮМКІН</span>
+                                        <span class="detail-date">10.03.2024</span>
+                                    </div>
+                                    <div class="progress-bar sm">
+                                        <div class="progress-fill warning" style="width: 58%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn-link">
+                                Барлық тізімді көру
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="quality-distribution-card">
+                        <div class="chart-header">
+                            <h3>Сапа бөлінуі</h3>
+                            <div class="chart-controls">
+                                <button class="btn-icon-sm active">
+                                    <i class="fas fa-chart-bar"></i>
+                                </button>
+                                <button class="btn-icon-sm">
+                                    <i class="fas fa-chart-pie"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="qualityChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- AI Chat Panel -->
+        <aside class="ai-chat-panel" id="aiChatPanel">
+            <div class="chat-header">
+                <div class="chat-title">
+                    <div class="ai-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div>
+                        <h3>AI Көмекші</h3>
+                        <p class="chat-status online">Онлайн</p>
+                    </div>
+                </div>
+                <button class="btn-icon" id="closeChatBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <div class="message ai-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <p>Сәлеметсіз бе! Мен AgroSmart AI көмекшісімін. Субсидиялар, жер талдауы, болжамдар және басқа да сұрақтар бойынша көмектесе аламын. Не туралы білгіңіз келеді?</p>
+                        <div class="message-time">10:30</div>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <h4>Жиі қойылатын сұрақтар:</h4>
+                    <button class="quick-action-btn">
+                        <i class="fas fa-question-circle"></i>
+                        Субсидия алу шарттары қандай?
+                    </button>
+                    <button class="quick-action-btn">
+                        <i class="fas fa-chart-line"></i>
+                        2025 жылға арналған болжам қандай?
+                    </button>
+                    <button class="quick-action-btn">
+                        <i class="fas fa-map-marked-alt"></i>
+                        Қай облыста ең көп субсидия беріледі?
+                    </button>
+                    <button class="quick-action-btn">
+                        <i class="fas fa-leaf"></i>
+                        Топырағымның сапасын қалай жақсартамын?
+                    </button>
+                </div>
+            </div>
+
+            <div class="chat-input-container">
+                <div class="chat-input-wrapper">
+                    <button class="btn-icon-sm">
+                        <i class="fas fa-paperclip"></i>
+                    </button>
+                    <input type="text" class="chat-input" placeholder="Сұрағыңызды жазыңыз..." id="chatInput">
+                    <button class="btn-icon-sm btn-send" id="sendMessageBtn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <p class="chat-disclaimer">AI көмекші бета режимінде. Маңызды шешімдер үшін мамандарға хабарласыңыз.</p>
+            </div>
+        </aside>
+
+        <!-- Chat Toggle Button -->
+        <button class="chat-toggle-btn" id="chatToggleBtn">
+            <i class="fas fa-comment-dots"></i>
+            <span class="chat-badge">1</span>
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/charts.js"></script>
+    <script src="scripts/chat.js"></script>
+</body>
+</html>
