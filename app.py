@@ -303,7 +303,7 @@ if page == "Жалпы шолу":
     st.markdown("""
     <div class="page-header">
         <p class="page-title">Жалпы шолу</p>
-        <p class="page-subtitle">Субсидия өтінімдерінің жиынтық аналитикасы · 2025 жыл</p>
+        <p class="page-subtitle">Субсидия өтінімдерінің жиынтық аналитикасы · 2026 жыл</p>
     </div>
     """, unsafe_allow_html=True)
 
