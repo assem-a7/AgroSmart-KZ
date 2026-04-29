@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgroSmart KZ UI Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">AgroSmart KZ</div>
+    <div class="top-actions">
+      <div class="search">Іздеу...</div>
+      <button class="icon-btn">⚙</button>
+      <button class="icon-btn">🔔</button>
+      <div class="avatar">AK</div>
+    </div>
+  </header>
+
+  <aside class="sidebar">
+    <div class="logo-block">
+      <div class="logo-title">AgroSmart KZ</div>
+      <div class="logo-sub">Мемлекеттік портал</div>
+      <span class="chip">AI ПЛАТФОРМАСЫ</span>
+    </div>
+
+    <nav class="menu">
+      <a class="menu-item active" href="#">Жалпы шолу</a>
+      <a class="menu-item" href="#">Аймақтық карта</a>
+      <a class="menu-item" href="#">AI Скоринг</a>
+      <a class="menu-item" href="#">Болжамдау</a>
+      <a class="menu-item" href="#">Жер талдауы</a>
+      <a class="menu-item" href="#">Субсидия верификациясы</a>
+    </nav>
+
+    <button class="primary-btn">Есепті жүктеу</button>
+
+    <div class="sidebar-footer">
+      <div>📁 Дерек көзі: ҚР субсидия тізімі 2025</div>
+      <div>📍 17 облыс + 3 қала</div>
+      <div>🤖 Isolation Forest + XGBoost</div>
+    </div>
+  </aside>
+
+  <main class="content">
+    <section class="page-head">
+      <div>
+        <h1>Болжамдау жүйесі</h1>
+        <p>AI-негізделген аналитикалық деректер мен ауылшаруашылық стратегиялары</p>
+      </div>
+      <div class="filters">
+        <button class="ghost-btn">2024</button>
+        <button class="ghost-btn">2025</button>
+        <button class="ghost-btn">Маусым: Көктем</button>
+      </div>
+    </section>
+
+    <section class="kpi-grid">
+      <article class="kpi-card">
+        <span class="kpi-label">Болжамды бюджет</span>
+        <h3>4.2 млрд ₸</h3>
+        <p>+12% өткен жылмен салыстырғанда</p>
+      </article>
+      <article class="kpi-card">
+        <span class="kpi-label">Өнімділік болжамы</span>
+        <h3>18.5 ц/га</h3>
+        <p>+5.4% оңтайландыру әсері</p>
+      </article>
+      <article class="kpi-card">
+        <span class="kpi-label">Өтінімдер саны</span>
+        <h3>12,480</h3>
+        <p>өңделу үстінде</p>
+      </article>
+      <article class="kpi-card danger">
+        <span class="kpi-label">Қуаңшылық қаупі</span>
+        <h3>Төмен (14%)</h3>
+        <p>маусымдық бағалау</p>
+      </article>
+    </section>
+
+    <section class="main-grid">
+      <article class="panel chart-panel">
+        <div class="panel-head">
+          <h2>Өтінімдер динамикасы және болжамы</h2>
+          <span class="legend">● Нақты &nbsp; ○ Болжам</span>
+        </div>
+        <div class="fake-chart" aria-label="chart placeholder">
+          <svg viewBox="0 0 900 280" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#0f8a45" stop-opacity="0.28"/>
+                <stop offset="100%" stop-color="#0f8a45" stop-opacity="0.02"/>
+              </linearGradient>
+            </defs>
+            <path d="M30,240 C120,220 170,140 260,150 C350,160 390,220 500,180 C620,135 690,150 790,100 L790,260 L30,260 Z" fill="url(#areaGrad)"/>
+            <path d="M30,240 C120,220 170,140 260,150 C350,160 390,220 500,180 C620,135 690,150 790,100" fill="none" stroke="#0f8a45" stroke-width="4"/>
+            <path d="M500,180 C620,135 690,150 790,100" fill="none" stroke="#85d9a8" stroke-width="4" stroke-dasharray="8 7"/>
+          </svg>
+        </div>
+      </article>
+
+      <article class="panel insight-panel">
+        <h2>AI Стратегиялық түсініктер</h2>
+        <div class="insight-box">
+          <h3>Drought Risk Analysis</h3>
+          <p>Су үнемдеу технологияларын енгізу ұсынылады, шығын төмендеуі мүмкін.</p>
+        </div>
+        <div class="insight-box">
+          <h3>Yield Optimization</h3>
+          <p>Тыңайтқыштарды дифференциалды қолдану арқылы өнім артады.</p>
+        </div>
+        <button class="white-btn">Толық стратегияны көру</button>
+      </article>
+    </section>
+
+    <section class="panel table-panel">
+      <div class="panel-head">
+        <h2>Аймақтық болжам кестесі</h2>
+        <div class="table-actions">
+          <button class="ghost-btn small">Фильтр</button>
+          <button class="ghost-btn small">Экспорт</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Аймақ</th>
+              <th>Болжамды өнім (т)</th>
+              <th>Бюджет (млн ₸)</th>
+              <th>Қауіп</th>
+              <th>AI скоринг</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Солтүстік Қазақстан</td>
+              <td>450,200</td>
+              <td>1,250.0</td>
+              <td><span class="badge ok">ТӨМЕН</span></td>
+              <td><div class="bar"><span style="width:86%"></span></div></td>
+            </tr>
+            <tr>
+              <td>Ақмола облысы</td>
+              <td>380,150</td>
+              <td>980.5</td>
+              <td><span class="badge mid">ОРТАША</span></td>
+              <td><div class="bar"><span style="width:72%"></span></div></td>
+            </tr>
+            <tr>
+              <td>Қостанай облысы</td>
+              <td>410,400</td>
+              <td>1,100.2</td>
+              <td><span class="badge ok">ТӨМЕН</span></td>
+              <td><div class="bar"><span style="width:81%"></span></div></td>
+            </tr>
+            <tr>
+              <td>Түркістан облысы</td>
+              <td>220,800</td>
+              <td>850.4</td>
+              <td><span class="badge high">ЖОҒАРЫ</span></td>
+              <td><div class="bar"><span style="width:58%"></span></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
